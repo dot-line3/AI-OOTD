@@ -46,9 +46,12 @@ if not st.session_state["is_logged_in"]:
 
     with col1:
         st.subheader("🔑 로그인")
-        login_id = st.text_input("아이디", key="login_id")
-        login_pw = st.text_input("비밀번호", type="password", key="login_pw")
-        if st.button("로그인 실행", use_container_width=True):
+        # st.form 안에 넣으면 입력창에서 Enter를 눌러도 제출된다 (실사용 피드백 반영)
+        with st.form("login_form"):
+            login_id = st.text_input("아이디", key="login_id")
+            login_pw = st.text_input("비밀번호", type="password", key="login_pw")
+            login_submitted = st.form_submit_button("로그인 실행", use_container_width=True)
+        if login_submitted:
             success, msg = db.authenticate_user(login_id, login_pw)
             if success:
                 st.session_state["is_logged_in"] = True
@@ -61,9 +64,11 @@ if not st.session_state["is_logged_in"]:
 
     with col2:
         st.subheader("📝 회원가입")
-        reg_id = st.text_input("신규 아이디", key="reg_id")
-        reg_pw = st.text_input("신규 비밀번호", type="password", key="reg_pw")
-        if st.button("회원가입 신청", use_container_width=True):
+        with st.form("register_form"):
+            reg_id = st.text_input("신규 아이디", key="reg_id")
+            reg_pw = st.text_input("신규 비밀번호", type="password", key="reg_pw")
+            reg_submitted = st.form_submit_button("회원가입 신청", use_container_width=True)
+        if reg_submitted:
             success, msg = db.register_user(reg_id, reg_pw)
             if success:
                 st.success(msg)
