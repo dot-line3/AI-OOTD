@@ -1,0 +1,13 @@
+# 비밀 정보
+.env
+
+# 가상환경 / 캐시
+ootd-venv/
+__pycache__/
+*.pyc
+
+# 로컬 데이터 (사용자 계정, 옷장)
+*.db
+
+# 개인 연습 파일
+practice.ipynb
