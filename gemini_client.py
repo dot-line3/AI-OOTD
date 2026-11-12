@@ -15,7 +15,7 @@ class SafeGeminiClient:
             raise ValueError(".env 파일에서 GEMINI_API_KEY를 찾을 수 없습니다.")
         
         # 모델이 응답 없이 멈춰도 다음 모델로 넘어가도록 호출 제한 시간(ms)을 둔다
-        self.client = genai.Client(api_key=self.api_key, http_options={"timeout": 30_000})
+        self.client = genai.Client(api_key=self.api_key, http_options={"timeout": 20_000})
         
         # 1순위 및 백업 모델 순서
         self.model_chain = [
